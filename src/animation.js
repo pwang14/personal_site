@@ -1,18 +1,18 @@
-
+/*
 import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/build/three.module.js'
 
 import { EffectComposer } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/postprocessing/RenderPass.js';
 import { FilmPass } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/postprocessing/FilmPass.js';
 import { UnrealBloomPass } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/postprocessing/UnrealBloomPass.js';
+*/
 
-/*
 import * as THREE from 'three';
+
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js';
-*/
 
 const signCanvas = document.querySelector('#main-bg-canvas');
 const mainRenderer = new THREE.WebGLRenderer({canvas: signCanvas, alpha: true});
@@ -79,7 +79,7 @@ composer.addPass(renderPass);
 const firstBloomPass = new UnrealBloomPass(new THREE.Vector2(signCanvas.clientWidth, signCanvas.clientHeight), 1.25, 0.8, 0.3);
 const secondBloomPass = new UnrealBloomPass(new THREE.Vector2(signCanvas.clientWidth, signCanvas.clientHeight), 1.25, 1.6, 0.0);
 composer.addPass(firstBloomPass);
-//composer.addPass(secondBloomPass);
+composer.addPass(secondBloomPass);
 const filmPass = new FilmPass(0.5, 0, 0, false);
 composer.addPass(filmPass);
 
