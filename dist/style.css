@@ -1,5 +1,6 @@
 html {
     height: 100%;
+    font-size: 1em;
 }
 
 body {
@@ -9,7 +10,7 @@ body {
     font-size: 100%;
     color: white;
 
-    background-color: #0e2e49;
+    background-color: #1A237E;
 }
 
 nav {
@@ -18,17 +19,38 @@ nav {
 
     position: fixed;
     top: 0;
-    right: -15em;
-    
-    transition: right 0.5s;
-    
+    right: -18em;
+
+    transition: right 0.75s;
+
     z-index: 1;
 
-    background-color: #8f4545;
+    background-image: linear-gradient(40deg, #37474F, #272727);
+    box-shadow: 0px 0px 40px 0px #212121;
+}
+
+h1 {
+    padding: 1em;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 3em;
+    background-image: linear-gradient(90deg, #76e0ee, #8c8aff 15em);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+p {
+    padding: 2em;
 }
 
 a:visited {
     color: white;
+}
+
+canvas {
+    position: relative;
 }
 
 .spacing {
@@ -49,11 +71,31 @@ a:visited {
     top: 5em;
 }
 
-#main-bg {
-    border-bottom: 0.5em solid;
+#main-content {
+    display: flex;
+    flex-direction: column;
 }
 
-#main-bg-canvas {
-    width: 100%;
-    height: 50em;
+#intro {
+    background-image: linear-gradient(140deg, #121966, #0D47A1);
+}
+
+#intro-text {
+    position: relative;
+}
+
+#transition {
+    height: 20em;
+}
+
+#point1 {
+    background-image: linear-gradient(180deg, #0e6681, #055da0);
+}
+
+#point2 {
+    background-image: linear-gradient(90deg, #176d45, #035e43);
+}
+
+#point3 {
+    background-image: linear-gradient(40deg, #6d0b3f, #a71b1b);
 }

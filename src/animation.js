@@ -1,25 +1,29 @@
-/*
+
 import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/build/three.module.js'
 
 import { EffectComposer } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/postprocessing/RenderPass.js';
 import { FilmPass } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/postprocessing/FilmPass.js';
 import { UnrealBloomPass } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/postprocessing/UnrealBloomPass.js';
-*/
 
+/*
 import * as THREE from 'three';
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js';
+*/
 
-const signCanvas = document.querySelector('#main-bg-canvas');
-const mainRenderer = new THREE.WebGLRenderer({canvas: signCanvas, alpha: true});
-mainRenderer.setSize(signCanvas.clientWidth, signCanvas.clientHeight);
+const introCanvas = document.querySelector('#intro-canvas');
+const mainRenderer = new THREE.WebGLRenderer({
+    canvas: introCanvas,
+    alpha: true,
+});
+mainRenderer.setSize(introCanvas.clientWidth, introCanvas.clientHeight, false);
 
 const fov = 75;
-const aspect = signCanvas.clientWidth / signCanvas.clientHeight;
+const aspect = introCanvas.clientWidth / introCanvas.clientHeight;
 const near = 0.1;
 const far = 5;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
@@ -27,26 +31,26 @@ camera.position.z = 2;
 
 const scene = new THREE.Scene();
 
-const ratio = 700/393;
-const signHeight = 1.5;
-const signWidth = signHeight * ratio;
-const signGeometry = new THREE.PlaneGeometry(signWidth, signHeight);
+const imgRatio = 700/393;
+const introHeight = 1.5;
+const introWidth = introHeight * imgRatio;
+const introGeometry = new THREE.PlaneGeometry(introWidth, introHeight);
 
 const loader = new THREE.TextureLoader();
-const signTexture = loader.load('./../assets/img/main-bg-sign.png');
+const introTexture = loader.load('./../assets/img/main-bg-sign.png');
 const material = new THREE.MeshBasicMaterial({
-    map: signTexture,
+    map: introTexture,
     side: THREE.DoubleSide,
 });
 
-const sign = new THREE.Mesh(signGeometry, material);
-scene.add(sign);
+const introSign = new THREE.Mesh(introGeometry, material);
+scene.add(introSign);
 
-let count = 0;
-function rotate(canvas, obj, e) {
+function rotate(canvas, obj, e)
+{
     const dx = e.offsetX - canvas.clientWidth/2;
     const dy = canvas.clientHeight/2 - e.offsetY;
-    const dz = 2 * canvas.clientWidth;
+    const dz = 4 * canvas.clientWidth;
 
     const angleY = Math.atan(dx/dz);
     const angleX = Math.atan(dy/dz);
@@ -55,39 +59,46 @@ function rotate(canvas, obj, e) {
     obj.rotation.x = -angleX;
 }
 
-let live = false;
-signCanvas.addEventListener('mousedown', e => {
-    if (!live) live = true;
+introCanvas.addEventListener('mousemove', e =>
+{
+    rotate(introCanvas, introSign, e);
 });
 
-signCanvas.addEventListener('mousemove', e => {
-    if (live) rotate(signCanvas, sign, e);
-});
-
-signCanvas.addEventListener('mouseup', e => {
-    if (live) {
-        live = false;
-        sign.rotation.y = 0;
-        sign.rotation.x = 0;
-    }
+introCanvas.addEventListener('mouseleave', e =>
+{
+    //introSign.rotation.y = 0;
+    //introSign.rotation.x = 0;
 });
 
 const composer = new EffectComposer(mainRenderer);
 
 const renderPass = new RenderPass(scene, camera);
 composer.addPass(renderPass);
-const firstBloomPass = new UnrealBloomPass(new THREE.Vector2(signCanvas.clientWidth, signCanvas.clientHeight), 1.25, 0.8, 0.3);
-const secondBloomPass = new UnrealBloomPass(new THREE.Vector2(signCanvas.clientWidth, signCanvas.clientHeight), 1.25, 1.6, 0.0);
-composer.addPass(firstBloomPass);
-composer.addPass(secondBloomPass);
+
+const bloomPass = new UnrealBloomPass(new THREE.Vector2(introCanvas.clientWidth, introCanvas.clientHeight), 1.25, 1.2, 0.25);
+composer.addPass(bloomPass);
+
 const filmPass = new FilmPass(0.5, 0, 0, false);
 composer.addPass(filmPass);
 
-function render(now) {
-    requestAnimationFrame(render);
+let introCanvasWidth = 0;
+let introCanvasHeight = 0;
+function render(now)
+{
+    if (introCanvasWidth != introCanvas.clientWidth)
+    {
+        introCanvasWidth = introCanvas.clientWidth;
+        introCanvasHeight = introCanvas.clientHeight;
+
+        bloomPass.strength = 0.9 + (1800 - introCanvasWidth) / 1800;
+
+        mainRenderer.setSize(introCanvasWidth, introCanvasHeight, false);
+        composer.setSize(introCanvasWidth, introCanvasHeight);
+    }
+
     composer.render();
+
+    requestAnimationFrame(render);
 }
 
 requestAnimationFrame(render);
-
-console.log('General Kenobi!');

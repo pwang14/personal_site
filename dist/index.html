@@ -6,7 +6,7 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto+Slab:wght@100;400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&family=Roboto+Slab:wght@100;400;800&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="style.css">
     </head>
@@ -21,17 +21,38 @@
                 <li><a href="#">Project 3</a></li>
             </ul>
         </nav>
-        
-        <div id="main-bg">
-            <canvas id="main-bg-canvas"></canvas>
+
+        <div id="main-content">
+            <div id="intro">
+                <canvas id="intro-canvas"></canvas>
+                <div id="intro-text">
+                    <h1>I'm Patrick Wang</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus dapibus quam, cursus lobortis ante dapibus at. Proin vestibulum
+                        odio ac aliquet lobortis. Aliquam porta nec justo sit amet ornare. Fusce mi lorem, hendrerit nec nisi a, sodales placerat nisl. Cras dignissim
+                        eros risus, id dapibus velit scelerisque sit amet. Pellentesque egestas semper mauris, sit amet vehicula dui consectetur vestibulum.
+                        Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam sodales leo ac tincidunt vehicula. In hac habitasse platea dictumst.
+                        Aliquam hendrerit vehicula dolor et maximus. Suspendisse potenti. Donec sollicitudin vehicula velit in varius. Vestibulum ante ipsum
+                        primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam vitae massa sodales, ultrices metus vel, faucibus augue. Duis vitae
+                        elementum diam. Integer sit amet ultricies quam, id semper odio.
+                    </p>
+                </div>
+                <div id="transition"></div>
+            </div>
+
+            <div id="point1">
+                <canvas id="point1-canvas"></canvas>
+            </div>
+            <div id="point2">
+                <canvas id="point2-canvas"></canvas>
+            </div>
+            <div id="point3">
+                <canvas id="point3-canvas"></canvas>
+            </div>
+
+            <div class="spacing"></div>
         </div>
 
-        <div id="point1"></div>
-        <div id="point2"></div>
-        <div id="point3"></div>
-
-        <div class="spacing"></div>
-        
         <footer></footer>
 
         <script src="main.js"></script>
