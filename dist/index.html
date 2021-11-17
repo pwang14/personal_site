@@ -12,7 +12,9 @@
     </head>
 
     <body>
-        <button id="menu-button">Menu</button>
+        <div id="menu-button">
+            <p>=</p>
+        </div>
 
         <nav>
             <ul id="nav-ul">
@@ -22,32 +24,59 @@
             </ul>
         </nav>
 
+        <div id="nav-fade"></div>
+
         <div id="main-content">
             <div id="intro">
                 <canvas id="intro-canvas"></canvas>
                 <div id="intro-text">
-                    <h1>I'm Patrick Wang</h1>
+                    <h1>Hi. <br> I'm Patrick Wang.</h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus dapibus quam, cursus lobortis ante dapibus at. Proin vestibulum
-                        odio ac aliquet lobortis. Aliquam porta nec justo sit amet ornare. Fusce mi lorem, hendrerit nec nisi a, sodales placerat nisl. Cras dignissim
-                        eros risus, id dapibus velit scelerisque sit amet. Pellentesque egestas semper mauris, sit amet vehicula dui consectetur vestibulum.
-                        Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam sodales leo ac tincidunt vehicula. In hac habitasse platea dictumst.
-                        Aliquam hendrerit vehicula dolor et maximus. Suspendisse potenti. Donec sollicitudin vehicula velit in varius. Vestibulum ante ipsum
-                        primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam vitae massa sodales, ultrices metus vel, faucibus augue. Duis vitae
-                        elementum diam. Integer sit amet ultricies quam, id semper odio.
+                        I'm a computer science student at the University of Waterloo.
+                        <br> <br>
+                        I'm passionate about developing software and learning cool things.
                     </p>
                 </div>
+                <div class="canvas-spacing"></div>
                 <div id="transition"></div>
             </div>
 
             <div id="point1">
                 <canvas id="point1-canvas"></canvas>
+                <div id="point1-text" class="point-text">
+                    <h1>Work experience.</h1>
+                    <p>
+                        I've worked as a software developer at
+                        AMD, CoreAVI, and Ford.
+                        Most of my work has been in C++,
+                        with some scripting as well.
+                    </p>
+                </div>
+                <div class="canvas-spacing"></div>
             </div>
             <div id="point2">
                 <canvas id="point2-canvas"></canvas>
+                <div id="point2-text" class="point-text">
+                    <h1>Academics.</h1>
+                    <p>
+                        I'm majoring in computer science,
+                        with minors in combinatorics & optimization
+                        and pure mathematics.
+                    </p>
+                </div>
+                <div class="canvas-spacing"></div>
             </div>
             <div id="point3">
                 <canvas id="point3-canvas"></canvas>
+                <div id="point3-text" class="point-text">
+                    <h1>Side projects.</h1>
+                    <p>
+                        I've done side projects in various fields,
+                        including computer graphics, web development,
+                        and AI/ML.
+                    </p>
+                </div>
+                <div class="canvas-spacing"></div>
             </div>
 
             <div class="spacing"></div>

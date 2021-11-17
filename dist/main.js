@@ -1,13 +1,35 @@
 const nav = document.querySelector('nav');
+const navFade = document.querySelector('#nav-fade')
+const transitionTime = 0.6;
 
+let isNavOpen = false;
 function openNav()
 {
+    nav.style.transition = `right ${transitionTime}s`;
+
     nav.style.right = '0';
+    navFade.style.backgroundColor = '#211d3350';
+
+    navFade.style.zIndex = 4;
+
+    isNavOpen = true;
 }
 
 function closeNav()
 {
-    nav.style.right = `-18em`;
+    nav.style.transition = `right ${transitionTime}s`;
+
+    nav.style.right = `-24vw`;
+    navFade.style.backgroundColor = '#211d3300';
+
+    navFade.style.zIndex = 2;
+
+    isNavOpen = false;
+
+    setTimeout(() =>
+    {
+        if (!isNavOpen) nav.style.transition = '0s';
+    }, transitionTime * 1000);
 }
 
 let isOpen = false;
@@ -28,87 +50,36 @@ function toggleNav()
 const menuButton = document.querySelector('#menu-button');
 menuButton.onclick = toggleNav;
 
-function resizeCanvas(canvas, alignment)
-{
-    const parent = canvas.parentNode;
-    const parentWidth = parent.clientWidth;
-
-    for (let i = 0; i < alignment.thresholds.length; i++)
-    {
-        if (parentWidth < alignment.thresholds[i])
-        {
-            canvas.width = parentWidth * alignment.scales[i];
-            canvas.height = parentWidth * alignment.scales[i] / alignment.ratio;
-
-            canvas.style.left = `${parentWidth * alignment.offsets[i]}px`;
-
-            break;
-        }
-    }
-}
-
-function loadImage(canvas, display)
-{
-    const img = new Image();
-    img.src = display.imgInfo.src;
-    img.addEventListener('load', () =>
-    {
-        display.img = img;
-        display.imgInfo.loaded = true;
-
-        drawCanvas(canvas, display);
-    }, false);
-}
-
-function drawCanvas(canvas, display)
-{
-    if (display.imgInfo.loaded)
-    {
-        const ctx = canvas.getContext('2d');
-
-        const scale = display.imgInfo.scale;
-        const offset = (1 - scale) / 2;
-
-        const filters = display.filters;
-
-        const width = canvas.clientWidth;
-        const height= canvas.clientHeight;
-
-        ctx.clearRect(0, 0, width, height);
-
-        canvas.style.filter = Object.keys(filters).map(k => k + '(' + filters[k] + ')').join(' ');
-
-        ctx.shadowColor = display.shadowColor;
-        ctx.shadowBlur = display.shadowBlur;
-
-        ctx.drawImage(display.img, offset * width, offset * height, scale * width, scale * height);
-    }
-}
-
-
 const imgRatio = 700/393;
 const smallScreenThreshold = 1000;
 
 const introInfo =
     {
-        id: '#intro-canvas',
+        canvasId: '#intro-canvas',
+        thresholds: [smallScreenThreshold, Infinity],
         alignment:
         {
-            thresholds: [smallScreenThreshold, Infinity],
-            scales: [3/2, 6/7],
-            offsets: [-1/4, -1/6],
+            scales: [3/2, 1],
+            offsets: [-1/4, -0.255],
             ratio: imgRatio,
+        },
+        text:
+        {
+            textId: '#point1-text',
+            tops: [0, 1/4],
+            lefts: ['50%', '0'],
+            widths: ['50%', '100%'],
         },
     };
 
-const pointInfo = [
+const pointsInfo = [
     {
-        id: '#point1-canvas',
+        canvasId: '#point1-canvas',
+        thresholds: [smallScreenThreshold, Infinity],
         alignment:
         {
-            thresholds: [smallScreenThreshold, Infinity],
-            scales: [6/7, 2/3],
-            offsets: [1/14, -1/8],
+            scales: [6/7, 17/24],
+            offsets: [1/14, -1/7],
             ratio: imgRatio,
         },
         display:
@@ -123,20 +94,27 @@ const pointInfo = [
             filters:
             {
                 'hue-rotate': '0',
-                'saturate': '1.5',
+                'saturate': '1.9',
                 'brightness': '2',
             },
             shadowColor: '#2196F3',
             shadowBlur: 20,
         },
+        text:
+        {
+            textId: '#point1-text',
+            tops: [0, 1/10],
+            lefts: ['50%', '0'],
+            widths: ['50%', '100%'],
+        },
     },
     {
-        id: '#point2-canvas',
+        canvasId: '#point2-canvas',
+        thresholds: [smallScreenThreshold, Infinity],
         alignment:
         {
-            thresholds: [smallScreenThreshold, Infinity],
-            scales: [6/7, 2/3],
-            offsets: [1/14, 1 + 1/8 - 2/3],
+            scales: [6/7, 17/24],
+            offsets: [1/14, 1 + 1/7 - 17/24],
             ratio: imgRatio,
         },
         display:
@@ -157,14 +135,21 @@ const pointInfo = [
             shadowColor: '#00B8D4',
             shadowBlur: 20,
         },
+        text:
+        {
+            textId: '#point2-text',
+            tops: [0, 1/10],
+            lefts: ['50%', '0'],
+            widths: ['50%', '100%'],
+        },
     },
     {
-        id: '#point3-canvas',
+        canvasId: '#point3-canvas',
+        thresholds: [smallScreenThreshold, Infinity],
         alignment:
         {
-            thresholds: [smallScreenThreshold, Infinity],
-            scales: [6/7, 2/3],
-            offsets: [1/14, -1/8],
+            scales: [6/7, 17/24],
+            offsets: [1/14, -1/7],
             ratio: imgRatio,
         },
         display:
@@ -185,29 +170,144 @@ const pointInfo = [
             shadowColor: '#C51162',
             shadowBlur: 20,
         },
+        text:
+        {
+            textId: '#point3-text',
+            tops: [0, 1/10],
+            lefts: ['50%', '0'],
+            widths: ['50%', '100%'],
+        },
     }
 ];
 
-function updateCanvases()
+function loadImage(canvas, displayInfo)
 {
-    resizeCanvas(document.querySelector(introInfo.id), introInfo.alignment);
-
-    pointInfo.forEach((canvasInfo) =>
+    const img = new Image();
+    img.src = displayInfo.imgInfo.src;
+    img.addEventListener('load', () =>
     {
-        resizeCanvas(document.querySelector(canvasInfo.id), canvasInfo.alignment);
-        drawCanvas(document.querySelector(canvasInfo.id), canvasInfo.display)
-    });
+        displayInfo.img = img;
+        displayInfo.imgInfo.loaded = true;
+
+        drawCanvas(canvas, displayInfo);
+    }, false);
 }
 
 function initializeCanvases()
 {
-    pointInfo.forEach((canvasInfo) =>
+    pointsInfo.forEach((point) =>
     {
-        loadImage(document.querySelector(canvasInfo.id), canvasInfo.display);
+        loadImage(document.querySelector(point.canvasId), point.display);
     })
 }
 
+function resizeCanvas(canvas, thresholds, alignInfo)
+{
+    const parent = canvas.parentNode;
+    const spacing = parent.querySelector('.canvas-spacing');
+    const parentWidth = parent.clientWidth;
+
+    for (let i = 0; i < thresholds.length; i++)
+    {
+        if (parentWidth < thresholds[i])
+        {
+            canvas.width = parentWidth * alignInfo.scales[i];
+            canvas.height = parentWidth * alignInfo.scales[i] / alignInfo.ratio;
+
+            canvas.style.left = `${parentWidth * alignInfo.offsets[i]}px`;
+
+            spacing.style.height = `${parentWidth * alignInfo.scales[i] / alignInfo.ratio}px`;
+
+            break;
+        }
+    }
+}
+
+function drawCanvas(canvas, displayInfo)
+{
+    if (displayInfo.imgInfo.loaded)
+    {
+        const ctx = canvas.getContext('2d');
+
+        const scale = displayInfo.imgInfo.scale;
+        const offset = (1 - scale) / 2;
+
+        const filters = displayInfo.filters;
+
+        const width = canvas.clientWidth;
+        const height= canvas.clientHeight;
+
+        ctx.clearRect(0, 0, width, height);
+
+        canvas.style.filter = Object.keys(filters).map(k => k + '(' + filters[k] + ')').join(' ');
+
+        ctx.shadowColor = displayInfo.shadowColor;
+        ctx.shadowBlur = displayInfo.shadowBlur;
+
+        ctx.drawImage(displayInfo.img, offset * width, offset * height, scale * width, scale * height);
+    }
+}
+
+function updateCanvases()
+{
+    resizeCanvas(document.querySelector(introInfo.canvasId), introInfo.thresholds, introInfo.alignment);
+
+    pointsInfo.forEach((point) =>
+    {
+        resizeCanvas(document.querySelector(point.canvasId), point.thresholds, point.alignment);
+        drawCanvas(document.querySelector(point.canvasId), point.display)
+    });
+}
+
+const html = document.querySelector('html');
+function updateText(textInfo, thresholds)
+{
+    const text = document.querySelector(textInfo.textId);
+    const parent = text.parentNode;
+    const parentWidth = parent.clientWidth;
+
+    let top = parent.offsetTop;
+
+    for (let i = 0; i < thresholds.length; i++)
+    {
+        if (parentWidth < thresholds[i])
+        {
+            top += parentWidth * textInfo.tops[i];
+            text.style.top = `${top}px`;
+
+            break;
+        }
+    }
+}
+
+function updateTexts()
+{
+    pointsInfo.forEach((point) =>
+    {
+        updateText(point.text, point.thresholds);
+    });
+}
+
+function updateMisc()
+{
+    const transition = document.querySelector('#transition');
+    transition.style.height = `${window.innerWidth/100}em`;
+}
+
+updateMisc();
 initializeCanvases();
 updateCanvases();
+updateTexts();
 
-window.onresize = updateCanvases;
+window.onresize = () =>
+{
+    nav.style.transition = '0s';
+    if (nav.style.right != '0')
+    {
+        nav.style.right = '-24vw';
+    }
+
+    updateMisc();
+    updateCanvases();
+    updateTexts();
+};
