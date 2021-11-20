@@ -516,7 +516,7 @@ function lightOn(canvas, point, state)
                     setTimeout(() =>
                     {
                         if (state.on) switchLight(canvas, point, true);
-                    }, 80)
+                    }, 70)
                 }
             }, 200);
         }
