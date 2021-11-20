@@ -22,13 +22,15 @@ function closeNav()
     nav.style.right = `-24vw`;
     navFade.style.backgroundColor = '#211d3300';
 
-    navFade.style.zIndex = 2;
-
     isNavOpen = false;
 
     setTimeout(() =>
     {
-        if (!isNavOpen) nav.style.transition = '0s';
+        if (!isNavOpen) 
+        {
+            nav.style.transition = '0s';
+            navFade.style.zIndex = -1;
+        }
     }, transitionTime * 1000);
 }
 
@@ -59,28 +61,34 @@ const introInfo =
         thresholds: [smallScreenThreshold, Infinity],
         alignment:
         {
-            scales: [3/2, 1],
-            offsets: [-1/4, -0.255],
+            scales: [1.5, 1],
+            offsets: [-0.25, -0.255],
             ratio: imgRatio,
+            spacing: [2.25, 0.9],
         },
         text:
         {
-            textId: '#point1-text',
-            tops: [0, 1/4],
-            lefts: ['50%', '0'],
-            widths: ['50%', '100%'],
+            textId: '#intro-text',
+            tops: [0.65, 0.08],
+            lefts: ['16%', '49%'],
+            widths: ['70%', '42%'],
+            sizes: [2.8, 2],
+            h1Ratio: 4.75/2,
         },
     };
 
-const pointsInfo = [
+const pointsInfo = {
+    '#point1':
     {
+        id: '#point1',
         canvasId: '#point1-canvas',
         thresholds: [smallScreenThreshold, Infinity],
         alignment:
         {
-            scales: [6/7, 17/24],
-            offsets: [1/14, -1/7],
+            scales: [0.86, 0.71],
+            offsets: [0.071, -0.14],
             ratio: imgRatio,
+            spacing: [1.35, 0.71],
         },
         display:
         {
@@ -91,6 +99,9 @@ const pointsInfo = [
                 loaded: false,
                 scale: 1/2,
             },
+        },
+        displayOn:
+        {
             filters:
             {
                 'hue-rotate': '0',
@@ -100,22 +111,46 @@ const pointsInfo = [
             shadowColor: '#2196F3',
             shadowBlur: 20,
         },
+        displayOff:
+        {
+            filters:
+            {
+                'hue-rotate': '0',
+                'saturate': '0.5',
+                'brightness': '1',
+            },
+            shadowBlur: 0,
+        },
         text:
         {
             textId: '#point1-text',
-            tops: [0, 1/10],
-            lefts: ['50%', '0'],
-            widths: ['50%', '100%'],
+            tops: [0.45, 0.1],
+            widths: ['72%', '50%'],
+            sizes: [2, 1.5],
+            h1Ratio: 3.5/1.5,
+        },
+        textVisible:
+        {
+            lefts: ['15%', '40%'],
+            opacity: 1,
+        },
+        textInvisible:
+        {
+            lefts: ['40%', '60%'],
+            opacity: 0,
         },
     },
+    '#point2':
     {
+        id: '#point2',
         canvasId: '#point2-canvas',
         thresholds: [smallScreenThreshold, Infinity],
         alignment:
         {
-            scales: [6/7, 17/24],
-            offsets: [1/14, 1 + 1/7 - 17/24],
+            scales: [0.86, 0.71],
+            offsets: [0.071, 2 - 0.86 - 0.71],
             ratio: imgRatio,
+            spacing: [1.35, 0.71],
         },
         display:
         {
@@ -126,6 +161,9 @@ const pointsInfo = [
                 loaded: false,
                 scale: 1/2,
             },
+        },
+        displayOn:
+        {
             filters:
             {
                 'hue-rotate': '-50deg',
@@ -135,22 +173,46 @@ const pointsInfo = [
             shadowColor: '#00B8D4',
             shadowBlur: 20,
         },
+        displayOff:
+        {
+            filters:
+            {
+                'hue-rotate': '-50deg',
+                'saturate': '0.5',
+                'brightness': '1',
+            },
+            shadowBlur: 0,
+        },
         text:
         {
             textId: '#point2-text',
-            tops: [0, 1/10],
-            lefts: ['50%', '0'],
-            widths: ['50%', '100%'],
+            tops: [0.45, 0.1],
+            widths: ['72%', '50%'],
+            sizes: [2, 1.5],
+            h1Ratio: 3.5/1.5,
+        },
+        textVisible:
+        {
+            lefts: ['15%', '12%'],
+            opacity: 1,
+        },
+        textInvisible:
+        {
+            lefts: ['-10%', '-8%'],
+            opacity: 0,
         },
     },
+    '#point3':
     {
+        id: '#point3',
         canvasId: '#point3-canvas',
         thresholds: [smallScreenThreshold, Infinity],
         alignment:
         {
-            scales: [6/7, 17/24],
-            offsets: [1/14, -1/7],
+            scales: [0.86, 0.71],
+            offsets: [0.071, -0.14],
             ratio: imgRatio,
+            spacing: [1.35, 0.71],
         },
         display:
         {
@@ -161,6 +223,9 @@ const pointsInfo = [
                 loaded: false,
                 scale: 1/2,
             },
+        },
+        displayOn:
+        {
             filters:
             {
                 'hue-rotate': '80deg',
@@ -170,15 +235,36 @@ const pointsInfo = [
             shadowColor: '#C51162',
             shadowBlur: 20,
         },
+        displayOff:
+        {
+            filters:
+            {
+                'hue-rotate': '80deg',
+                'saturate': '0.4',
+                'brightness': '1',
+            },
+            shadowBlur: 0,
+        },
         text:
         {
             textId: '#point3-text',
-            tops: [0, 1/10],
-            lefts: ['50%', '0'],
-            widths: ['50%', '100%'],
+            tops: [0.45, 0.1],
+            widths: ['72%', '50%'],
+            sizes: [2, 1.5],
+            h1Ratio: 3.5/1.5,
+        },
+        textVisible:
+        {
+            lefts: ['15%', '40%'],
+            opacity: 1,
+        },
+        textInvisible:
+        {
+            lefts: ['40%', '60%'],
+            opacity: 0,
         },
     }
-];
+};
 
 function loadImage(canvas, displayInfo)
 {
@@ -195,8 +281,9 @@ function loadImage(canvas, displayInfo)
 
 function initializeCanvases()
 {
-    pointsInfo.forEach((point) =>
+    Object.values(pointsInfo).forEach((point) =>
     {
+        Object.assign(point.display, point.displayOff);
         loadImage(document.querySelector(point.canvasId), point.display);
     })
 }
@@ -209,14 +296,14 @@ function resizeCanvas(canvas, thresholds, alignInfo)
 
     for (let i = 0; i < thresholds.length; i++)
     {
-        if (parentWidth < thresholds[i])
+        if (window.innerWidth < thresholds[i])
         {
             canvas.width = parentWidth * alignInfo.scales[i];
             canvas.height = parentWidth * alignInfo.scales[i] / alignInfo.ratio;
 
             canvas.style.left = `${parentWidth * alignInfo.offsets[i]}px`;
 
-            spacing.style.height = `${parentWidth * alignInfo.scales[i] / alignInfo.ratio}px`;
+            spacing.style.height = `${parentWidth * alignInfo.spacing[i] / alignInfo.ratio}px`;
 
             break;
         }
@@ -252,14 +339,13 @@ function updateCanvases()
 {
     resizeCanvas(document.querySelector(introInfo.canvasId), introInfo.thresholds, introInfo.alignment);
 
-    pointsInfo.forEach((point) =>
+    Object.values(pointsInfo).forEach((point) =>
     {
         resizeCanvas(document.querySelector(point.canvasId), point.thresholds, point.alignment);
         drawCanvas(document.querySelector(point.canvasId), point.display)
     });
 }
 
-const html = document.querySelector('html');
 function updateText(textInfo, thresholds)
 {
     const text = document.querySelector(textInfo.textId);
@@ -270,10 +356,26 @@ function updateText(textInfo, thresholds)
 
     for (let i = 0; i < thresholds.length; i++)
     {
-        if (parentWidth < thresholds[i])
+        if (window.innerWidth < thresholds[i])
         {
             top += parentWidth * textInfo.tops[i];
             text.style.top = `${top}px`;
+            text.style.left = textInfo.lefts[i];
+
+            text.style.width = textInfo.widths[i];
+
+            text.querySelectorAll('p').forEach(p =>
+                {
+                    p.style.fontSize = `${textInfo.sizes[i]}vw`;
+                })
+
+            text.querySelectorAll('h1').forEach(h =>
+                {
+                    h.style.fontSize = `${textInfo.h1Ratio * textInfo.sizes[i]}vw`;
+                })
+
+
+            text.style.opacity = textInfo.opacity;
 
             break;
         }
@@ -282,16 +384,21 @@ function updateText(textInfo, thresholds)
 
 function updateTexts()
 {
-    pointsInfo.forEach((point) =>
+    updateText(introInfo.text, introInfo.thresholds);
+
+    Object.values(pointsInfo).forEach((point) =>
     {
         updateText(point.text, point.thresholds);
     });
 }
 
+Object.values(pointsInfo).forEach((point) =>
+{
+    Object.assign(point.text, point.textInvisible);
+});
+
 function updateMisc()
 {
-    const transition = document.querySelector('#transition');
-    transition.style.height = `${window.innerWidth/100}em`;
 }
 
 updateMisc();
@@ -302,12 +409,131 @@ updateTexts();
 window.onresize = () =>
 {
     nav.style.transition = '0s';
-    if (nav.style.right != '0')
+    Object.values(pointsInfo).forEach((point) =>
     {
-        nav.style.right = '-24vw';
-    }
+        const text = document.querySelector(point.text.textId);
+        text.style.transition = '0s';
+    });
 
     updateMisc();
     updateCanvases();
     updateTexts();
 };
+
+let states =
+{
+    '#point1':
+    {
+        on: false,
+    },
+    '#point2':
+    {
+        on: false,
+    },
+    '#point3':
+    {
+        on: false,
+    }
+};
+
+function switchLight(canvas, point, on)
+{
+    Object.assign(point.display, on ? point.displayOn : point.displayOff);
+    drawCanvas(canvas, point.display);
+}
+
+function lightOn(canvas, point, state)
+{
+    setTimeout(() =>
+    {
+        if (state.on)
+        {
+            switchLight(canvas, point, true);
+            setTimeout(() =>
+            {
+                if (state.on)
+                {
+                    switchLight(canvas, point, false);
+                    setTimeout(() =>
+                    {
+                        if (state.on) switchLight(canvas, point, true);
+                    }, 80)
+                }
+            }, 200);
+        }
+    }, 500)
+}
+
+function animateText(point, on)
+{
+    const text = document.querySelector(point.text.textId);
+    text.style.transition = 'all 1s';
+    Object.assign(point.text, on ? point.textVisible : point.textInvisible);
+
+    updateText(point.text, point.thresholds);
+}
+
+function callback(entries, observer)
+{
+    entries.forEach(entry =>
+        {
+            const id = entry.target.animationId;
+            const canvas = entry.target.querySelector('canvas');
+            const point = pointsInfo[id];
+            let state = states[id];
+
+            if (entry.intersectionRatio >= 0.65 &&
+                !state.on)
+            {
+                state.on = true
+                lightOn(canvas, point, state);
+                animateText(point, true);
+            }
+            else if (entry.intersectionRatio < 0.6 &&
+                state.on &&
+                entry.intersectionRect.y === entry.boundingClientRect.y)
+            {
+                state.on = false;
+                switchLight(canvas, point, false);
+                animateText(point, false);
+            }
+        })
+}
+
+const observer = new IntersectionObserver(callback,
+{
+    root: null,
+    threshold: [0.55, 0.65],
+});
+
+Object.keys(states).forEach((k) =>
+{
+    const obj = document.querySelector(k)
+    obj.animationId = k;
+    observer.observe(obj);
+});
+
+function setGradient(obj) {
+    const gradientStart = 10;
+    const resolution = 10;
+
+    let space = 100 - gradientStart;
+    let step = space/resolution;
+    let rgbColor = '#115568';
+
+    let gradientStr = `linear-gradient(${rgbColor}00 ${gradientStart}%`;
+
+    for (let i=1; i<=resolution; i++) {
+        let stop = `${rgbColor}`;
+        let alpha = 1 - (1 + Math.cos(Math.PI*(i/resolution)))/2;
+        stop += alpha.toString() + ` ${gradientStart + i*step}%`;
+        gradientStr += ', ' + stop;
+    }
+
+    gradientStr += ')';
+
+    obj.style.background = gradientStr;
+}
+
+const transition = document.querySelector('#transition');
+//setGradient(transition);

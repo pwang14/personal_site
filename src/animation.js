@@ -49,8 +49,8 @@ scene.add(introSign);
 
 function rotate(canvas, obj, e)
 {
-    const dx = e.offsetX - canvas.clientWidth/2;
-    const dy = canvas.clientHeight/2 - e.offsetY;
+    const dx = e.clientX - canvas.clientWidth*0.3;
+    const dy = canvas.clientHeight*0.4 - e.clientY;
     const dz = 4 * canvas.clientWidth;
 
     const angleY = Math.atan(dx/dz);
@@ -60,16 +60,13 @@ function rotate(canvas, obj, e)
     obj.rotation.x = -angleX;
 }
 
-introCanvas.addEventListener('mousemove', e =>
+
+const intro = document.querySelector('#intro');
+intro.addEventListener('mousemove', e =>
 {
     rotate(introCanvas, introSign, e);
 });
 
-introCanvas.addEventListener('mouseleave', e =>
-{
-    //introSign.rotation.y = 0;
-    //introSign.rotation.x = 0;
-});
 
 const composer = new EffectComposer(mainRenderer);
 
