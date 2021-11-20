@@ -15,22 +15,6 @@ body {
     background-color: #10153f;
 }
 
-nav {
-    width: 22vw;
-    height: 100%;
-
-    position: fixed;
-    top: 0;
-    right: -24vw;
-
-    transition: right 0s;
-
-    z-index: 5;
-
-    background-image: linear-gradient(40deg, #5E35B1, #303F9F);
-    box-shadow: 0px 0px 40px 0px #190e4790;
-}
-
 h1 {
     font-family: 'Inter', sans-serif;
     font-size: 3.5vw;
@@ -44,12 +28,45 @@ p {
     font-size: 1.5vw;
 }
 
-a {
-    font-size: 1.5vw;
+nav {
+    height: 100%;
+
+    position: fixed;
+    top: 0;
+    right: -21vw;
+
+    transition: right 0s;
+
+    z-index: 5;
+
+    background-image: linear-gradient(40deg, #5E35B1, #303F9F);
+    box-shadow: 0px 0px 40px 0px #190e4790;
 }
 
-a:visited {
-    color: rgb(225, 199, 255);
+nav ul {
+    position: relative;
+    top: 8vw;
+    left: 1.4vw;
+
+    font-size: 1.5vw;
+
+    list-style-type: none;
+    line-height: 3.5;
+}
+
+nav li {
+    width: 10vw;
+
+    border-bottom:1px solid white;
+}
+
+nav a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+nav a:visited {
+    color: #e1c7ff;
 }
 
 canvas {
@@ -62,6 +79,10 @@ footer {
     background-image: linear-gradient(150deg, #112544, #0f1449)
 }
 
+.bar {
+    background-color: white;
+}
+
 .point-text {
     width: 100%;
 
@@ -70,7 +91,7 @@ footer {
 
 #menu-button {
     position: fixed;
-    top: 0vw;
+    top: 3vw;
     right: 4vw;
 
     z-index: 6;
@@ -78,11 +99,6 @@ footer {
 
 #menu-button p {
     font-size: 3vw;
-}
-
-#nav-ul {
-    position: relative;
-    top: 8vw;
 }
 
 #nav-fade {
@@ -130,7 +146,7 @@ footer {
 }
 
 #point1 {
-    background-image: linear-gradient(0deg, #09517a, #083877);
+    background-image: linear-gradient(0deg, #004c7e, #083877);
 }
 
 #point1-text h1 {
@@ -138,7 +154,7 @@ footer {
 }
 
 #point2 {
-    background-image: linear-gradient(90deg, #1a5e2f -5vw, #04664d);
+    background-image: linear-gradient(90deg, #1f5f16 -5vw, #04664d);
 }
 
 #point2-text h1 {

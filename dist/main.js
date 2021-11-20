@@ -2,7 +2,29 @@ const nav = document.querySelector('nav');
 const navFade = document.querySelector('#nav-fade')
 const transitionTime = 0.6;
 
+const imgRatio = 700/393;
+const smallScreenThreshold = 1000;
+
+let navInfo =
+{
+    thresholds: [smallScreenThreshold, Infinity],
+    widths: [40, 19],
+    items:
+    {
+        lefts: ['2vw', '1.4vw'],
+        widths: ['20vw', '10vw'],
+        sizes: ['2.5vw', '1.5vw'],
+    },
+    button:
+    {
+        widths: ['3.5vw', '1.6vw'],
+        heights: ['0.75vw', '0.4vw'],
+        margins: ['1.1vw', '0.5vw'],
+    },
+};
+
 let isNavOpen = false;
+let navWidth = 19;
 function openNav()
 {
     nav.style.transition = `right ${transitionTime}s`;
@@ -19,7 +41,7 @@ function closeNav()
 {
     nav.style.transition = `right ${transitionTime}s`;
 
-    nav.style.right = `-24vw`;
+    nav.style.right = `-${navWidth + 2}vw`;
     navFade.style.backgroundColor = '#211d3300';
 
     isNavOpen = false;
@@ -33,6 +55,43 @@ function closeNav()
         }
     }, transitionTime * 1000);
 }
+
+function updateNav()
+{
+    nav.style.transition = '0s';
+
+    for (let i = 0; i < navInfo.thresholds.length; i++)
+    {
+        if (window.innerWidth < navInfo.thresholds[i])
+        {
+            navWidth = navInfo.widths[i];
+            nav.style.width = `${navWidth}vw`;
+            if (parseFloat(getComputedStyle(nav).right) < -0.1) nav.style.right = `-${navWidth + 2}vw`;
+
+            const list = nav.querySelector('ul');
+            list.style.left = navInfo.items.lefts[i];
+            list.style.fontSize = navInfo.items.sizes[i];
+
+            const items = nav.querySelectorAll('li');
+            items.forEach((li) =>
+            {
+                li.style.width = navInfo.items.widths[i];
+            });
+
+            const bars = document.querySelectorAll('#menu-button .bar');
+            bars.forEach((bar) =>
+            {
+                bar.style.width = navInfo.button.widths[i];
+                bar.style.height = navInfo.button.heights[i];
+                bar.style.margin = navInfo.button.margins[i] + ' 0';
+            })
+
+            break;
+        }
+    }
+}
+
+updateNav();
 
 let isOpen = false;
 function toggleNav()
@@ -52,32 +111,30 @@ function toggleNav()
 const menuButton = document.querySelector('#menu-button');
 menuButton.onclick = toggleNav;
 
-const imgRatio = 700/393;
-const smallScreenThreshold = 1000;
-
-const introInfo =
+let introInfo =
+{
+    canvasId: '#intro-canvas',
+    thresholds: [smallScreenThreshold, Infinity],
+    alignment:
     {
-        canvasId: '#intro-canvas',
-        thresholds: [smallScreenThreshold, Infinity],
-        alignment:
-        {
-            scales: [1.5, 1],
-            offsets: [-0.25, -0.255],
-            ratio: imgRatio,
-            spacing: [2.25, 0.9],
-        },
-        text:
-        {
-            textId: '#intro-text',
-            tops: [0.65, 0.08],
-            lefts: ['16%', '49%'],
-            widths: ['70%', '42%'],
-            sizes: [2.8, 2],
-            h1Ratio: 4.75/2,
-        },
-    };
+        scales: [1.5, 1],
+        offsets: [-0.25, -0.255],
+        ratio: imgRatio,
+        spacing: [2.25, 0.8],
+    },
+    text:
+    {
+        textId: '#intro-text',
+        tops: [0.65, 0.08],
+        lefts: ['16%', '49%'],
+        widths: ['70%', '42%'],
+        sizes: [2.8, 2],
+        h1Ratio: 4.75/2,
+    },
+};
 
-const pointsInfo = {
+let pointsInfo =
+{
     '#point1':
     {
         id: '#point1',
@@ -415,6 +472,8 @@ window.onresize = () =>
         text.style.transition = '0s';
     });
 
+    updateNav();
+
     updateMisc();
     updateCanvases();
     updateTexts();
@@ -513,27 +572,4 @@ Object.keys(states).forEach((k) =>
     observer.observe(obj);
 });
 
-function setGradient(obj) {
-    const gradientStart = 10;
-    const resolution = 10;
-
-    let space = 100 - gradientStart;
-    let step = space/resolution;
-    let rgbColor = '#115568';
-
-    let gradientStr = `linear-gradient(${rgbColor}00 ${gradientStart}%`;
-
-    for (let i=1; i<=resolution; i++) {
-        let stop = `${rgbColor}`;
-        let alpha = 1 - (1 + Math.cos(Math.PI*(i/resolution)))/2;
-        stop += alpha.toString() + ` ${gradientStart + i*step}%`;
-        gradientStr += ', ' + stop;
-    }
-
-    gradientStr += ')';
-
-    obj.style.background = gradientStr;
-}
-
 const transition = document.querySelector('#transition');
-//setGradient(transition);

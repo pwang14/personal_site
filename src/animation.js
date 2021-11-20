@@ -50,7 +50,7 @@ scene.add(introSign);
 function rotate(canvas, obj, e)
 {
     const dx = e.clientX - canvas.clientWidth*0.3;
-    const dy = canvas.clientHeight*0.4 - e.clientY;
+    const dy = canvas.clientHeight*0.3 - e.clientY;
     const dz = 4 * canvas.clientWidth;
 
     const angleY = Math.atan(dx/dz);
