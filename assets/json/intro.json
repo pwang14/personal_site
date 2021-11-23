@@ -1,0 +1,20 @@
+{
+    "canvasId": "#intro-canvas",
+    "thresholds": [1000, 5000],
+    "alignment":
+    {
+        "scales": [1.5, 1],
+        "offsets": [-0.25, -0.245],
+        "ratio": 1.8,
+        "spacing": [2.25, 0.8]
+    },
+    "text":
+    {
+        "textId": "#intro-text",
+        "tops": [0.65, 0.08],
+        "lefts": ["16%", "49%"],
+        "widths": ["70%", "42%"],
+        "sizes": [2.8, 2],
+        "h1Ratio": 2.375
+    }
+}

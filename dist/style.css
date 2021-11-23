@@ -15,6 +15,10 @@ body {
     background-color: #10153f;
 }
 
+p {
+    font-size: 1.5vw;
+}
+
 h1 {
     font-family: 'Inter', sans-serif;
     font-size: 3.5vw;
@@ -22,10 +26,6 @@ h1 {
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-}
-
-p {
-    font-size: 1.5vw;
 }
 
 nav {
@@ -84,7 +84,7 @@ footer {
 }
 
 .point-text {
-    width: 100%;
+    width: 50%;
 
     position: absolute;
 }
@@ -128,11 +128,7 @@ footer {
 }
 
 #intro-text {
-    width: 100%;
-
     position: absolute;
-    top: 6.75vw;
-    left: 50%;
 }
 
 #intro-text h1 {

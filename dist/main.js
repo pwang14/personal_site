@@ -1,27 +1,58 @@
+const numXmlRequests = 3;
+let xmlRequests = 0;
+
+let navInfo = {};
+$.ajax({
+    type: 'GET',
+    url: '../assets/json/nav.json',
+    dataType: 'json',
+    success: (data) =>
+    {
+        navInfo = data;
+        navInfo.thresholds[navInfo.thresholds.length - 1] = Infinity;
+
+        xmlRequests++;
+        if (xmlRequests === numXmlRequests) initialize();
+    }
+})
+
+let introInfo = {};
+$.ajax({
+    type: 'GET',
+    url: '../assets/json/intro.json',
+    dataType: 'json',
+    success: (data) =>
+    {
+        introInfo = data;
+        introInfo.thresholds[introInfo.thresholds.length - 1] = Infinity;
+
+        xmlRequests++;
+        if (xmlRequests === numXmlRequests) initialize();
+    }
+})
+
+let pointsInfo = {}; //point2 offset is 2 - 0.86 - 0.71 = 0.43
+$.ajax({
+    type: 'GET',
+    url: '../assets/json/points.json',
+    dataType: 'json',
+    success: (data) =>
+    {
+        pointsInfo = data;
+        Object.values(pointsInfo).forEach((point) =>
+        {
+            point.thresholds[point.thresholds.length - 1] = Infinity;
+            Object.assign(point.text, point.textInvisible);
+        });
+
+        xmlRequests++;
+        if (xmlRequests === numXmlRequests) initialize();
+    }
+})
+
 const nav = document.querySelector('nav');
 const navFade = document.querySelector('#nav-fade')
 const transitionTime = 0.6;
-
-const imgRatio = 700/393;
-const smallScreenThreshold = 1000;
-
-let navInfo =
-{
-    thresholds: [smallScreenThreshold, Infinity],
-    widths: [40, 19],
-    items:
-    {
-        lefts: ['2vw', '1.4vw'],
-        widths: ['20vw', '10vw'],
-        sizes: ['2.5vw', '1.5vw'],
-    },
-    button:
-    {
-        widths: ['3.5vw', '1.6vw'],
-        heights: ['0.75vw', '0.4vw'],
-        margins: ['1.1vw', '0.5vw'],
-    },
-};
 
 let isNavOpen = false;
 let navWidth = 19;
@@ -91,8 +122,6 @@ function updateNav()
     }
 }
 
-updateNav();
-
 let isOpen = false;
 function toggleNav()
 {
@@ -111,219 +140,7 @@ function toggleNav()
 const menuButton = document.querySelector('#menu-button');
 menuButton.onclick = toggleNav;
 
-let introInfo =
-{
-    canvasId: '#intro-canvas',
-    thresholds: [smallScreenThreshold, Infinity],
-    alignment:
-    {
-        scales: [1.5, 1],
-        offsets: [-0.25, -0.255],
-        ratio: imgRatio,
-        spacing: [2.25, 0.8],
-    },
-    text:
-    {
-        textId: '#intro-text',
-        tops: [0.65, 0.08],
-        lefts: ['16%', '49%'],
-        widths: ['70%', '42%'],
-        sizes: [2.8, 2],
-        h1Ratio: 4.75/2,
-    },
-};
-
-let pointsInfo =
-{
-    '#point1':
-    {
-        id: '#point1',
-        canvasId: '#point1-canvas',
-        thresholds: [smallScreenThreshold, Infinity],
-        alignment:
-        {
-            scales: [0.86, 0.71],
-            offsets: [0.071, -0.14],
-            ratio: imgRatio,
-            spacing: [1.35, 0.71],
-        },
-        display:
-        {
-            img: NaN,
-            imgInfo:
-            {
-                src: './../assets/img/briefcase.png',
-                loaded: false,
-                scale: 1/2,
-            },
-        },
-        displayOn:
-        {
-            filters:
-            {
-                'hue-rotate': '0',
-                'saturate': '1.9',
-                'brightness': '2',
-            },
-            shadowColor: '#2196F3',
-            shadowBlur: 20,
-        },
-        displayOff:
-        {
-            filters:
-            {
-                'hue-rotate': '0',
-                'saturate': '0.5',
-                'brightness': '1',
-            },
-            shadowBlur: 0,
-        },
-        text:
-        {
-            textId: '#point1-text',
-            tops: [0.45, 0.1],
-            widths: ['72%', '50%'],
-            sizes: [2, 1.5],
-            h1Ratio: 3.5/1.5,
-        },
-        textVisible:
-        {
-            lefts: ['15%', '40%'],
-            opacity: 1,
-        },
-        textInvisible:
-        {
-            lefts: ['40%', '60%'],
-            opacity: 0,
-        },
-    },
-    '#point2':
-    {
-        id: '#point2',
-        canvasId: '#point2-canvas',
-        thresholds: [smallScreenThreshold, Infinity],
-        alignment:
-        {
-            scales: [0.86, 0.71],
-            offsets: [0.071, 2 - 0.86 - 0.71],
-            ratio: imgRatio,
-            spacing: [1.35, 0.71],
-        },
-        display:
-        {
-            img: NaN,
-            imgInfo:
-            {
-                src: './../assets/img/book.png',
-                loaded: false,
-                scale: 1/2,
-            },
-        },
-        displayOn:
-        {
-            filters:
-            {
-                'hue-rotate': '-50deg',
-                'saturate': '1.5',
-                'brightness': '1.5',
-            },
-            shadowColor: '#00B8D4',
-            shadowBlur: 20,
-        },
-        displayOff:
-        {
-            filters:
-            {
-                'hue-rotate': '-50deg',
-                'saturate': '0.5',
-                'brightness': '1',
-            },
-            shadowBlur: 0,
-        },
-        text:
-        {
-            textId: '#point2-text',
-            tops: [0.45, 0.1],
-            widths: ['72%', '50%'],
-            sizes: [2, 1.5],
-            h1Ratio: 3.5/1.5,
-        },
-        textVisible:
-        {
-            lefts: ['15%', '12%'],
-            opacity: 1,
-        },
-        textInvisible:
-        {
-            lefts: ['-10%', '-8%'],
-            opacity: 0,
-        },
-    },
-    '#point3':
-    {
-        id: '#point3',
-        canvasId: '#point3-canvas',
-        thresholds: [smallScreenThreshold, Infinity],
-        alignment:
-        {
-            scales: [0.86, 0.71],
-            offsets: [0.071, -0.14],
-            ratio: imgRatio,
-            spacing: [1.35, 0.71],
-        },
-        display:
-        {
-            img: NaN,
-            imgInfo:
-            {
-                src: './../assets/img/project.png',
-                loaded: false,
-                scale: 1/2,
-            },
-        },
-        displayOn:
-        {
-            filters:
-            {
-                'hue-rotate': '80deg',
-                'saturate': '2',
-                'brightness': '2',
-            },
-            shadowColor: '#C51162',
-            shadowBlur: 20,
-        },
-        displayOff:
-        {
-            filters:
-            {
-                'hue-rotate': '80deg',
-                'saturate': '0.4',
-                'brightness': '1',
-            },
-            shadowBlur: 0,
-        },
-        text:
-        {
-            textId: '#point3-text',
-            tops: [0.45, 0.1],
-            widths: ['72%', '50%'],
-            sizes: [2, 1.5],
-            h1Ratio: 3.5/1.5,
-        },
-        textVisible:
-        {
-            lefts: ['15%', '40%'],
-            opacity: 1,
-        },
-        textInvisible:
-        {
-            lefts: ['40%', '60%'],
-            opacity: 0,
-        },
-    }
-};
-
-function loadImage(canvas, displayInfo)
+function initializeCanvas(canvas, displayInfo)
 {
     const img = new Image();
     img.src = displayInfo.imgInfo.src;
@@ -341,7 +158,7 @@ function initializeCanvases()
     Object.values(pointsInfo).forEach((point) =>
     {
         Object.assign(point.display, point.displayOff);
-        loadImage(document.querySelector(point.canvasId), point.display);
+        initializeCanvas(document.querySelector(point.canvasId), point.display);
     })
 }
 
@@ -417,7 +234,7 @@ function updateText(textInfo, thresholds)
         {
             top += parentWidth * textInfo.tops[i];
             text.style.top = `${top}px`;
-            text.style.left = textInfo.lefts[i];
+            if (textInfo.hasOwnProperty('lefts')) text.style.left = textInfo.lefts[i];
 
             text.style.width = textInfo.widths[i];
 
@@ -449,35 +266,12 @@ function updateTexts()
     });
 }
 
-Object.values(pointsInfo).forEach((point) =>
+function update()
 {
-    Object.assign(point.text, point.textInvisible);
-});
-
-function updateMisc()
-{
-}
-
-updateMisc();
-initializeCanvases();
-updateCanvases();
-updateTexts();
-
-window.onresize = () =>
-{
-    nav.style.transition = '0s';
-    Object.values(pointsInfo).forEach((point) =>
-    {
-        const text = document.querySelector(point.text.textId);
-        text.style.transition = '0s';
-    });
-
     updateNav();
-
-    updateMisc();
     updateCanvases();
     updateTexts();
-};
+}
 
 let states =
 {
@@ -559,17 +353,38 @@ function callback(entries, observer)
         })
 }
 
-const observer = new IntersectionObserver(callback,
+function initializeObserver()
 {
-    root: null,
-    threshold: [0.55, 0.65],
-});
+    const observer = new IntersectionObserver(callback,
+    {
+        root: null,
+        threshold: [0.55, 0.65],
+    });
 
-Object.keys(states).forEach((k) =>
+    Object.keys(states).forEach((k) =>
+    {
+        const obj = document.querySelector(k)
+        obj.animationId = k;
+        observer.observe(obj);
+    });
+}
+
+function initialize()
 {
-    const obj = document.querySelector(k)
-    obj.animationId = k;
-    observer.observe(obj);
-});
+    initializeObserver();
+    initializeCanvases();
 
-const transition = document.querySelector('#transition');
+    update();
+
+    window.onresize = () =>
+    {
+        nav.style.transition = '0s';
+        Object.values(pointsInfo).forEach((point) =>
+        {
+            const text = document.querySelector(point.text.textId);
+            text.style.transition = '0s';
+        });
+
+        update();
+    };
+}
