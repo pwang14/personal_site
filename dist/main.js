@@ -87,6 +87,11 @@ function closeNav()
     }, transitionTime * 1000);
 }
 
+const navList = nav.querySelector('ul');
+const navListItems = nav.querySelectorAll('li');
+
+const menuBars = document.querySelectorAll('#menu-button .bar');
+
 function updateNav()
 {
     nav.style.transition = '0s';
@@ -99,18 +104,15 @@ function updateNav()
             nav.style.width = `${navWidth}vw`;
             if (parseFloat(getComputedStyle(nav).right) < -0.1) nav.style.right = `-${navWidth + 2}vw`;
 
-            const list = nav.querySelector('ul');
-            list.style.left = navInfo.items.lefts[i];
-            list.style.fontSize = navInfo.items.sizes[i];
+            navList.style.left = navInfo.items.lefts[i];
+            navList.style.fontSize = navInfo.items.sizes[i];
 
-            const items = nav.querySelectorAll('li');
-            items.forEach((li) =>
+            navListItems.forEach((li) =>
             {
                 li.style.width = navInfo.items.widths[i];
             });
 
-            const bars = document.querySelectorAll('#menu-button .bar');
-            bars.forEach((bar) =>
+            menuBars.forEach((bar) =>
             {
                 bar.style.width = navInfo.button.widths[i];
                 bar.style.height = navInfo.button.heights[i];
