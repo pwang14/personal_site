@@ -1,0 +1,188 @@
+{
+    "#point1":
+    {
+        "id": "#point1",
+        "canvasId": "#point1-canvas",
+        "thresholds": [1000, 5000],
+        "alignment":
+        {
+            "scales": [0.86, 0.71],
+            "offsets": [0.071, -0.14],
+            "ratio": 1.78117,
+            "spacing": [1.35, 0.71]
+        },
+        "display":
+        {
+            "img": "",
+            "imgInfo":
+            {
+                "src": "./assets/img/briefcase.png",
+                "loaded": false,
+                "scale": 0.5
+            }
+        },
+        "displayOn":
+        {
+            "filters":
+            {
+                "hue-rotate": "0",
+                "saturate": "1.9",
+                "brightness": "2"
+            },
+            "shadowColor": "#2196F3",
+            "shadowBlur": 20
+        },
+        "displayOff":
+        {
+            "filters":
+            {
+                "hue-rotate": "0",
+                "saturate": "0.5",
+                "brightness": "1"
+            },
+            "shadowBlur": 0
+        },
+        "text":
+        {
+            "textId": "#point1-text",
+            "tops": [0.45, 0.1],
+            "widths": ["72%", "50%"],
+            "sizes": [2, 1.5],
+            "h1Ratio": 2.33
+        },
+        "textVisible":
+        {
+            "lefts": ["15%", "40%"],
+            "opacity": 1
+        },
+        "textInvisible":
+        {
+            "lefts": ["40%", "60%"],
+            "opacity": 0
+        }
+    },
+    "#point2":
+    {
+        "id": "#point2",
+        "canvasId": "#point2-canvas",
+        "thresholds": [1000, 5000],
+        "alignment":
+        {
+            "scales": [0.86, 0.71],
+            "offsets": [0.071, 0.43],
+            "ratio": 1.78117,
+            "spacing": [1.35, 0.71]
+        },
+        "display":
+        {
+            "img": "",
+            "imgInfo":
+            {
+                "src": "./assets/img/book.png",
+                "loaded": false,
+                "scale": 0.5
+            }
+        },
+        "displayOn":
+        {
+            "filters":
+            {
+                "hue-rotate": "-50deg",
+                "saturate": "1.5",
+                "brightness": "1.5"
+            },
+            "shadowColor": "#00B8D4",
+            "shadowBlur": 20
+        },
+        "displayOff":
+        {
+            "filters":
+            {
+                "hue-rotate": "-50deg",
+                "saturate": "0.5",
+                "brightness": "1"
+            },
+            "shadowBlur": 0
+        },
+        "text":
+        {
+            "textId": "#point2-text",
+            "tops": [0.45, 0.1],
+            "widths": ["72%", "50%"],
+            "sizes": [2, 1.5],
+            "h1Ratio": 2.33
+        },
+        "textVisible":
+        {
+            "lefts": ["15%", "12%"],
+            "opacity": 1
+        },
+        "textInvisible":
+        {
+            "lefts": ["-10%", "-8%"],
+            "opacity": 0
+        }
+    },
+    "#point3":
+    {
+        "id": "#point3",
+        "canvasId": "#point3-canvas",
+        "thresholds": [1000, 5000],
+        "alignment":
+        {
+            "scales": [0.86, 0.71],
+            "offsets": [0.071, -0.14],
+            "ratio": 1.78117,
+            "spacing": [1.35, 0.71]
+        },
+        "display":
+        {
+            "img": "",
+            "imgInfo":
+            {
+                "src": "./assets/img/project.png",
+                "loaded": false,
+                "scale": 0.5
+            }
+        },
+        "displayOn":
+        {
+            "filters":
+            {
+                "hue-rotate": "80deg",
+                "saturate": "2",
+                "brightness": "2"
+            },
+            "shadowColor": "#C51162",
+            "shadowBlur": 20
+        },
+        "displayOff":
+        {
+            "filters":
+            {
+                "hue-rotate": "80deg",
+                "saturate": "0.4",
+                "brightness": "1"
+            },
+            "shadowBlur": 0
+        },
+        "text":
+        {
+            "textId": "#point3-text",
+            "tops": [0.45, 0.1],
+            "widths": ["72%", "50%"],
+            "sizes": [2, 1.5],
+            "h1Ratio": 2.33
+        },
+        "textVisible":
+        {
+            "lefts": ["15%", "40%"],
+            "opacity": 1
+        },
+        "textInvisible":
+        {
+            "lefts": ["40%", "60%"],
+            "opacity": 0
+        }
+    }
+}

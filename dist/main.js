@@ -4,7 +4,7 @@ let xmlRequests = 0;
 let navInfo = {};
 $.ajax({
     type: 'GET',
-    url: '../assets/json/nav.json',
+    url: './assets/json/nav.json',
     dataType: 'json',
     success: (data) =>
     {
@@ -19,7 +19,7 @@ $.ajax({
 let introInfo = {};
 $.ajax({
     type: 'GET',
-    url: '../assets/json/intro.json',
+    url: './assets/json/intro.json',
     dataType: 'json',
     success: (data) =>
     {
@@ -34,7 +34,7 @@ $.ajax({
 let pointsInfo = {}; //point2 offset is 2 - 0.86 - 0.71 = 0.43
 $.ajax({
     type: 'GET',
-    url: '../assets/json/points.json',
+    url: './assets/json/points.json',
     dataType: 'json',
     success: (data) =>
     {

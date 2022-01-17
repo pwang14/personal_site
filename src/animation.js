@@ -38,7 +38,8 @@ const introWidth = introHeight * imgRatio;
 const introGeometry = new THREE.PlaneGeometry(introWidth, introHeight);
 
 const loader = new THREE.TextureLoader();
-const introTexture = loader.load('./../assets/img/main-bg-sign.png');
+//const introTexture = loader.load('./../assets/img/main-bg-sign.png');
+const introTexture = loader.load('./assets/img/main-bg-sign.png');
 const material = new THREE.MeshBasicMaterial({
     map: introTexture,
     side: THREE.DoubleSide,
