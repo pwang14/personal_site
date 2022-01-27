@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config development-webpack.config.js"
+    "build": "webpack --config development-webpack.config.js",
+    "deploy-gh": "npm run build && push-dir --dir=dist --branch=gh-pages"
   },
   "repository": {
     "type": "git",
