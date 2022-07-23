@@ -5,8 +5,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config development-webpack.config.js",
-    "deploy-gh": "npm run build && push-dir --dir=dist --branch=gh-pages"
+    "build": "webpack --config development-webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +19,6 @@
   },
   "homepage": "https://github.com/pwang14/personal_site#readme",
   "devDependencies": {
-    "gh-pages": "^3.2.3",
     "webpack": "^5.62.1",
     "webpack-cli": "^4.9.1"
   },
